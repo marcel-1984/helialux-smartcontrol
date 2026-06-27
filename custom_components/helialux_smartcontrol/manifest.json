@@ -1,0 +1,13 @@
+{
+  "domain": "helialux_smartcontrol",
+  "name": "HeliaLux SmartControl",
+  "version": "0.0.1",
+  "documentation": "https://github.com/marcel-1984/helialux-smartcontrol",
+  "issue_tracker": "https://github.com/marcel-1984/helialux-smartcontrol/issues",
+  "codeowners": [
+    "@marcel-1984"
+  ],
+  "requirements": [],
+  "iot_class": "local_polling",
+  "config_flow": true
+}

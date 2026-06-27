@@ -1,0 +1,20 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "HeliaLux SmartControl",
+        "description": "Enter the IP address of your HeliaLux SmartControl.",
+        "data": {
+          "host": "IP address",
+          "name": "Name"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to HeliaLux SmartControl."
+    },
+    "abort": {
+      "already_configured": "This HeliaLux SmartControl is already configured."
+    }
+  }
+}

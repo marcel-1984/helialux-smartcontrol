@@ -1,0 +1,97 @@
+"""API client for Juwel HeliaLux SmartControl."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any
+
+import aiohttp
+
+
+class HeliaLuxApiError(Exception):
+    """HeliaLux communication error."""
+
+
+@dataclass
+class HeliaLuxStatus:
+    white: int | None
+    blue: int | None
+    green: int | None
+    red: int | None
+    controller_time: str | None
+    simulation_time: int | None
+    cloud_active: bool | None
+    time_simulation_active: bool | None
+    target_time: str | None
+    cloud_time: str | None
+
+
+class HeliaLuxApi:
+    """Small async API client for HeliaLux SmartControl."""
+
+    def __init__(self, session: aiohttp.ClientSession, host: str) -> None:
+        self._session = session
+        self._host = host.replace("http://", "").replace("https://", "").rstrip("/")
+        self._base_url = f"http://{self._host}"
+
+    async def _post(self, endpoint: str, data: dict[str, Any]) -> dict[str, Any]:
+        url = f"{self._base_url}/{endpoint}"
+
+        try:
+            async with self._session.post(url, data=data, timeout=5) as response:
+                response.raise_for_status()
+                return await response.json(content_type=None)
+        except Exception as err:
+            raise HeliaLuxApiError(f"Error communicating with HeliaLux: {err}") from err
+
+    async def get_status(self) -> HeliaLuxStatus:
+        """Get live HeliaLux status."""
+        data = await self._post("stat", {"action": "10"})
+
+        status = data.get("S", {})
+        channels = data.get("C", {}).get("ch", [])
+
+        return HeliaLuxStatus(
+            white=_channel(channels, 0),
+            blue=_channel(channels, 1),
+            green=_channel(channels, 2),
+            red=_channel(channels, 3),
+            controller_time=status.get("dtime"),
+            simulation_time=status.get("stime"),
+            cloud_active=_to_bool(status.get("cswi")),
+            time_simulation_active=_to_bool(status.get("tswi")),
+            target_time=status.get("ttime"),
+            cloud_time=status.get("ctime"),
+        )
+
+    async def set_colors(self, white: int, blue: int, green: int, red: int) -> None:
+        """Set live color channels."""
+        await self._post(
+            "color",
+            {
+                "action": "1",
+                "ch1": _clamp(white),
+                "ch2": _clamp(blue),
+                "ch3": _clamp(green),
+                "ch4": _clamp(red),
+            },
+        )
+
+
+def _channel(channels: list[Any], index: int) -> int | None:
+    try:
+        return int(channels[index])
+    except (IndexError, TypeError, ValueError):
+        return None
+
+
+def _clamp(value: int) -> int:
+    return max(0, min(100, int(value)))
+
+
+def _to_bool(value: Any) -> bool | None:
+    if value in (True, "true", "1", 1):
+        return True
+    if value in (False, "false", "0", 0):
+        return False
+    return None
