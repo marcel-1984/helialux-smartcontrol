@@ -1,59 +1,76 @@
-# HeliaLux SmartControl for Home Assistant
+# HeliaLux SmartControl
 
-Custom Home Assistant integration for the **Juwel HeliaLux SmartControl** aquarium light controller.
+![HeliaLux SmartControl](docs/images/readme_banner.png)
 
-This integration communicates locally with the HeliaLux SmartControl over HTTP.  
-No cloud service is required.
+A modern Home Assistant integration for the **Juwel HeliaLux SmartControl**.
 
-## Features
+Control your aquarium lighting directly from Home Assistant with native RGBW control, cloud simulation, time simulation and full automation support.
 
-- Local connection to HeliaLux SmartControl
-- Device setup through the Home Assistant UI
-- Live color channel sensors:
-  - White
-  - Blue
-  - Green
-  - Red
-- Light entity
-- Manual channel sliders
-- Cloud Simulation switch
-- Time Simulation switch
-- Controller time sensors
-- HACS-ready structure
+---
 
-## Current status
+## ✨ Features
 
-This project is under active development.
+- ✅ Native Home Assistant integration
+- ✅ Automatic device discovery
+- ✅ RGBW Light entity
+- ✅ Individual RGBW sliders
+- ✅ Cloud Simulation switch
+- ✅ Time Simulation switch
+- ✅ Controller Time entity
+- ✅ Simulation Time entity
+- ✅ Target Time entity
+- ✅ Cloud Time entity
+- ✅ Buttons for controller functions
+- 🚧 Program upload support *(coming soon)*
+- 🚧 Lighting profiles *(coming soon)*
+- 🚧 Photo Mode *(coming soon)*
 
-Working in the current test version:
+---
 
-- Config flow
-- Local API connection
-- Sensors
-- Light entity
-- Number sliders
-- Cloud Simulation switch
-- Time Simulation switch
+## 📦 Installation
 
-Planned features:
+### Install using HACS
 
-- Better brightness support
-- Profile support
-- Program editor
-- Sunrise and sunset editor
-- Lovelace dashboard card
+1. Open **HACS**
+2. Open **Integrations**
+3. Click the **three dots**
+4. Choose **Custom repositories**
+5. Add:
 
-See [ROADMAP.md](ROADMAP.md) for the full roadmap.
-
-## Installation with HACS
-
-This repository can be added to HACS as a custom repository.
-
-1. Open Home Assistant.
-2. Go to **HACS**.
-3. Open the menu in the top right.
-4. Choose **Custom repositories**.
-5. Add this repository URL:
-
-```text
+```
 https://github.com/marcel-1984/helialux-smartcontrol
+```
+
+Category:
+
+```
+Integration
+```
+
+Install the integration and restart Home Assistant.
+
+---
+
+## 🖥 Dashboard
+
+![Dashboard](docs/images/dashboard.png)
+
+---
+
+## 🚀 Roadmap
+
+See the full development roadmap here:
+
+[ROADMAP.md](ROADMAP.md)
+
+---
+
+## 🤝 Contributing
+
+Bug reports and feature requests are always welcome.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
