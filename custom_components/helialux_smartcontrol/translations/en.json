@@ -16,5 +16,19 @@
     "abort": {
       "already_configured": "This HeliaLux SmartControl is already configured."
     }
+  },
+  "entity": {
+    "sensor": {
+      "white": { "name": "White" },
+      "blue": { "name": "Blue" },
+      "green": { "name": "Green" },
+      "red": { "name": "Red" },
+      "controller_time": { "name": "Controller Time" },
+      "simulation_time": { "name": "Simulation Time" },
+      "cloud_active": { "name": "Cloud Active" },
+      "time_simulation_active": { "name": "Time Simulation Active" },
+      "target_time": { "name": "Target Time" },
+      "cloud_time": { "name": "Cloud Time" }
+    }
   }
 }

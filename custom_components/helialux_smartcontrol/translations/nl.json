@@ -1,0 +1,34 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "HeliaLux SmartControl",
+        "description": "Voer het IP-adres van je HeliaLux SmartControl in.",
+        "data": {
+          "host": "IP-adres",
+          "name": "Naam"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met de HeliaLux SmartControl."
+    },
+    "abort": {
+      "already_configured": "Deze HeliaLux SmartControl is al geconfigureerd."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "white": { "name": "White" },
+      "blue": { "name": "Blue" },
+      "green": { "name": "Green" },
+      "red": { "name": "Red" },
+      "controller_time": { "name": "Controllertijd" },
+      "simulation_time": { "name": "Simulatietijd" },
+      "cloud_active": { "name": "Bewolking actief" },
+      "time_simulation_active": { "name": "Tijdsimulatie actief" },
+      "target_time": { "name": "Doeltijd" },
+      "cloud_time": { "name": "Bewolkingstijd" }
+    }
+  }
+}

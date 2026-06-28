@@ -20,17 +20,65 @@ class HeliaLuxSensorDescription(SensorEntityDescription):
     """HeliaLux sensor description."""
 
 
+# Names are no longer set here; they come from translations/<lang>.json via
+# translation_key. This also makes the generated entity_ids deterministic,
+# which prevents the "undefinedtype" entity_id fallback from ever happening
+# again on a fresh install.
 SENSORS = [
-    HeliaLuxSensorDescription(key="white", name="White", native_unit_of_measurement=PERCENTAGE, icon="mdi:white-balance-sunny"),
-    HeliaLuxSensorDescription(key="blue", name="Blue", native_unit_of_measurement=PERCENTAGE, icon="mdi:water"),
-    HeliaLuxSensorDescription(key="green", name="Green", native_unit_of_measurement=PERCENTAGE, icon="mdi:leaf"),
-    HeliaLuxSensorDescription(key="red", name="Red", native_unit_of_measurement=PERCENTAGE, icon="mdi:circle"),
-    HeliaLuxSensorDescription(key="controller_time", name="Controller Time", icon="mdi:clock-outline"),
-    HeliaLuxSensorDescription(key="simulation_time", name="Simulation Time", icon="mdi:timer-outline"),
-    HeliaLuxSensorDescription(key="cloud_active", name="Cloud Active", icon="mdi:weather-cloudy"),
-    HeliaLuxSensorDescription(key="time_simulation_active", name="Time Simulation Active", icon="mdi:timer-cog-outline"),
-    HeliaLuxSensorDescription(key="target_time", name="Target Time", icon="mdi:sun-clock"),
-    HeliaLuxSensorDescription(key="cloud_time", name="Cloud Time", icon="mdi:weather-cloudy-clock"),
+    HeliaLuxSensorDescription(
+        key="white",
+        translation_key="white",
+        native_unit_of_measurement=PERCENTAGE,
+        icon="mdi:white-balance-sunny",
+    ),
+    HeliaLuxSensorDescription(
+        key="blue",
+        translation_key="blue",
+        native_unit_of_measurement=PERCENTAGE,
+        icon="mdi:water",
+    ),
+    HeliaLuxSensorDescription(
+        key="green",
+        translation_key="green",
+        native_unit_of_measurement=PERCENTAGE,
+        icon="mdi:leaf",
+    ),
+    HeliaLuxSensorDescription(
+        key="red",
+        translation_key="red",
+        native_unit_of_measurement=PERCENTAGE,
+        icon="mdi:circle",
+    ),
+    HeliaLuxSensorDescription(
+        key="controller_time",
+        translation_key="controller_time",
+        icon="mdi:clock-outline",
+    ),
+    HeliaLuxSensorDescription(
+        key="simulation_time",
+        translation_key="simulation_time",
+        icon="mdi:timer-outline",
+    ),
+    HeliaLuxSensorDescription(
+        key="cloud_active",
+        translation_key="cloud_active",
+        icon="mdi:weather-cloudy",
+    ),
+    HeliaLuxSensorDescription(
+        key="time_simulation_active",
+        translation_key="time_simulation_active",
+        icon="mdi:timer-cog-outline",
+    ),
+    HeliaLuxSensorDescription(
+        key="target_time",
+        translation_key="target_time",
+        icon="mdi:sun-clock",
+    ),
+    HeliaLuxSensorDescription(
+        key="cloud_time",
+        translation_key="cloud_time",
+        icon="mdi:weather-cloudy-clock",
+    ),
 ]
 
 

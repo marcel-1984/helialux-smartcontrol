@@ -21,7 +21,7 @@ Control your aquarium lighting directly from Home Assistant with native RGBW con
 - ✅ Target Time entity
 - ✅ Cloud Time entity
 - ✅ Buttons for controller functions
-- 🚧 Program upload support *(coming soon)*
+- ✅ Program upload service
 - 🚧 Lighting profiles *(coming soon)*
 - 🚧 Photo Mode *(coming soon)*
 
