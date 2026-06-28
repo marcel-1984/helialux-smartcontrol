@@ -26,6 +26,18 @@ class HeliaLuxStatus:
     cloud_time: str | None
 
 
+@dataclass
+class HeliaLuxProgram:
+    name: str
+    times: list[int]
+    white: list[int]
+    blue: list[int]
+    green: list[int]
+    red: list[int]
+    cloud_intensity: list[int]
+    cloud_motion: list[int]
+
+
 class HeliaLuxApi:
     """Small async API client for HeliaLux SmartControl."""
 
@@ -41,6 +53,16 @@ class HeliaLuxApi:
             async with self._session.post(url, data=data, timeout=5) as response:
                 response.raise_for_status()
                 return await response.json(content_type=None)
+        except Exception as err:
+            raise HeliaLuxApiError(f"Error communicating with HeliaLux: {err}") from err
+
+    async def _post_no_json(self, endpoint: str, data: dict[str, Any]) -> str:
+        url = f"{self._base_url}/{endpoint}"
+
+        try:
+            async with self._session.post(url, data=data, timeout=5) as response:
+                response.raise_for_status()
+                return await response.text()
         except Exception as err:
             raise HeliaLuxApiError(f"Error communicating with HeliaLux: {err}") from err
 
@@ -99,6 +121,23 @@ class HeliaLuxApi:
             },
         )
 
+    async def save_program(self, program: HeliaLuxProgram) -> None:
+        """Upload a full HeliaLux lighting program."""
+        await self._post_no_json(
+            "pedit",
+            {
+                "action": "30",
+                "PNAME": program.name,
+                "TIMES": _array(program.times),
+                "CH1": _array(program.white),
+                "CH2": _array(program.blue),
+                "CH3": _array(program.green),
+                "CH4": _array(program.red),
+                "CINT": _array(program.cloud_intensity),
+                "CMOT": _array(program.cloud_motion),
+            },
+        )
+
 
 def _channel(channels: list[Any], index: int) -> int | None:
     try:
@@ -109,6 +148,10 @@ def _channel(channels: list[Any], index: int) -> int | None:
 
 def _clamp(value: int) -> int:
     return max(0, min(100, int(value)))
+
+
+def _array(values: list[int]) -> str:
+    return "[" + ",".join(str(int(value)) for value in values) + "]"
 
 
 def _to_bool(value: Any) -> bool | None:

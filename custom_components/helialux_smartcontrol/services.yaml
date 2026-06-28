@@ -1,0 +1,45 @@
+save_program:
+  name: Save program
+  description: Upload a full lighting program to the HeliaLux SmartControl.
+  fields:
+    name:
+      name: Program name
+      required: true
+      selector:
+        text:
+    times:
+      name: Times
+      description: List of times in minutes from midnight.
+      required: true
+      selector:
+        object:
+    white:
+      name: White channel
+      required: true
+      selector:
+        object:
+    blue:
+      name: Blue channel
+      required: true
+      selector:
+        object:
+    green:
+      name: Green channel
+      required: true
+      selector:
+        object:
+    red:
+      name: Red channel
+      required: true
+      selector:
+        object:
+    cloud_intensity:
+      name: Cloud intensity
+      required: true
+      selector:
+        object:
+    cloud_motion:
+      name: Cloud motion
+      required: true
+      selector:
+        object:
