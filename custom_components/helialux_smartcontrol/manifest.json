@@ -1,7 +1,7 @@
 {
   "domain": "helialux_smartcontrol",
   "name": "HeliaLux SmartControl",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "documentation": "https://github.com/marcel-1984/helialux-smartcontrol",
   "issue_tracker": "https://github.com/marcel-1984/helialux-smartcontrol/issues",
   "codeowners": [
