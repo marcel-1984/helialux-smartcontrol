@@ -77,6 +77,28 @@ class HeliaLuxApi:
             },
         )
 
+    async def set_simulation(
+        self,
+        simulation_time: int,
+        cloud_active: bool,
+        time_simulation_active: bool,
+        target_time: str,
+        cloud_time: str,
+        action: int,
+    ) -> None:
+        """Set simulation options."""
+        await self._post(
+            "stat",
+            {
+                "action": str(action),
+                "ch5": str(simulation_time),
+                "tswi": "true" if time_simulation_active else "false",
+                "ttime": target_time,
+                "cswi": "true" if cloud_active else "false",
+                "ctime": cloud_time,
+            },
+        )
+
 
 def _channel(channels: list[Any], index: int) -> int | None:
     try:
@@ -90,8 +112,8 @@ def _clamp(value: int) -> int:
 
 
 def _to_bool(value: Any) -> bool | None:
-    if value in (True, "true", "1", 1):
+    if value in (True, "true", "1", 1, "checked", "on"):
         return True
-    if value in (False, "false", "0", 0):
+    if value in (False, "false", "0", 0, "", None):
         return False
     return None

@@ -1,0 +1,10 @@
+{
+  "name": "HeliaLux SmartControl",
+  "content_in_root": false,
+  "render_readme": true,
+  "homeassistant": "2026.2.0",
+  "domains": [
+    "helialux_smartcontrol"
+  ],
+  "iot_class": "local_polling"
+}

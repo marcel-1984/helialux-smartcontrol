@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any
 
-from homeassistant.components.sensor import SensorEntity
+from homeassistant.components.sensor import SensorEntity, SensorEntityDescription
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import PERCENTAGE
 from homeassistant.core import HomeAssistant
@@ -15,25 +15,22 @@ from .const import DOMAIN
 from .coordinator import HeliaLuxCoordinator
 
 
-@dataclass
-class HeliaLuxSensorDescription:
-    key: str
-    name: str
-    unit: str | None = None
-    icon: str | None = None
+@dataclass(frozen=True, kw_only=True)
+class HeliaLuxSensorDescription(SensorEntityDescription):
+    """HeliaLux sensor description."""
 
 
 SENSORS = [
-    HeliaLuxSensorDescription("white", "White", PERCENTAGE, "mdi:white-balance-sunny"),
-    HeliaLuxSensorDescription("blue", "Blue", PERCENTAGE, "mdi:water"),
-    HeliaLuxSensorDescription("green", "Green", PERCENTAGE, "mdi:leaf"),
-    HeliaLuxSensorDescription("red", "Red", PERCENTAGE, "mdi:circle"),
-    HeliaLuxSensorDescription("controller_time", "Controller Time", None, "mdi:clock-outline"),
-    HeliaLuxSensorDescription("simulation_time", "Simulation Time", None, "mdi:timer-outline"),
-    HeliaLuxSensorDescription("cloud_active", "Cloud Active", None, "mdi:weather-cloudy"),
-    HeliaLuxSensorDescription("time_simulation_active", "Time Simulation Active", None, "mdi:timer-cog-outline"),
-    HeliaLuxSensorDescription("target_time", "Target Time", None, "mdi:sun-clock"),
-    HeliaLuxSensorDescription("cloud_time", "Cloud Time", None, "mdi:weather-cloudy-clock"),
+    HeliaLuxSensorDescription(key="white", name="White", native_unit_of_measurement=PERCENTAGE, icon="mdi:white-balance-sunny"),
+    HeliaLuxSensorDescription(key="blue", name="Blue", native_unit_of_measurement=PERCENTAGE, icon="mdi:water"),
+    HeliaLuxSensorDescription(key="green", name="Green", native_unit_of_measurement=PERCENTAGE, icon="mdi:leaf"),
+    HeliaLuxSensorDescription(key="red", name="Red", native_unit_of_measurement=PERCENTAGE, icon="mdi:circle"),
+    HeliaLuxSensorDescription(key="controller_time", name="Controller Time", icon="mdi:clock-outline"),
+    HeliaLuxSensorDescription(key="simulation_time", name="Simulation Time", icon="mdi:timer-outline"),
+    HeliaLuxSensorDescription(key="cloud_active", name="Cloud Active", icon="mdi:weather-cloudy"),
+    HeliaLuxSensorDescription(key="time_simulation_active", name="Time Simulation Active", icon="mdi:timer-cog-outline"),
+    HeliaLuxSensorDescription(key="target_time", name="Target Time", icon="mdi:sun-clock"),
+    HeliaLuxSensorDescription(key="cloud_time", name="Cloud Time", icon="mdi:weather-cloudy-clock"),
 ]
 
 
@@ -63,10 +60,8 @@ class HeliaLuxSensor(CoordinatorEntity, SensorEntity):
         """Initialize sensor."""
         super().__init__(coordinator)
         self.entity_description = description
-        self._attr_name = f"HeliaLux {description.name}"
+        self._attr_has_entity_name = True
         self._attr_unique_id = f"{entry_id}_{description.key}"
-        self._attr_native_unit_of_measurement = description.unit
-        self._attr_icon = description.icon
         self._attr_device_info = {
             "identifiers": {(DOMAIN, entry_id)},
             "name": "HeliaLux SmartControl",
