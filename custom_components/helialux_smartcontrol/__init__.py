@@ -9,7 +9,7 @@ from homeassistant.core import HomeAssistant
 from .const import DOMAIN
 from .coordinator import HeliaLuxCoordinator
 
-PLATFORMS = ["sensor", "light", "number", "switch"]
+PLATFORMS = ["sensor", "light", "number", "switch", "button", "time"]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
